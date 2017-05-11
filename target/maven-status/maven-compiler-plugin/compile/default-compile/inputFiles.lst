@@ -1,8 +1,11 @@
 D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\controller\AdminController.java
-D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\ApiHessianProxy.java
-D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\controller\IndexController.java
+D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\util\StringUtil.java
+D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\BaseController.java
+D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\Global.java
 D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\service\RemoteApiService.java
+D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\controller\IndexController.java
+D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\SpringListener.java
+D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\ApiHessianProxy.java
+D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\param\AjaxResult.java
 D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\interceptor\LoginInterceptor.java
 D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\service\RemoteApiServiceImpl.java
-D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\BaseController.java
-D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\SpringListener.java

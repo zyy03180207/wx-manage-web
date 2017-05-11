@@ -20,7 +20,39 @@ function refresh() {
   $("#mathnum").attr("src",url);
 
 }
-	
+function login() {
+	var username = $("#username").val();
+	var password = $("#password").val();
+	var vcode = $("#code").val();
+	if(username==""){
+		layer.msg('请输入用户名', {time: 3000, icon:5});
+		return;
+	}
+	if(password==""){
+		layer.msg('请输入密码', {time: 3000, icon:5});
+		return;
+	}
+	if(vcode==""){
+		layer.msg('请输入验证码', {time: 3000, icon:5});
+		return;
+	}
+	$.ajax({
+		type : "POST",
+		url : "login",
+		data : {"username":username,"password":password,"vcode":vcode},
+		dataType : "json",
+		success : function(data){
+			if(data.succ) {
+				window.location.href = 'index';
+			} else {
+				layer.msg(data.mesg, {time: 3000, icon:5});
+				refresh();
+			}
+		},
+		error : function(data){
+		}
+	});
+}
 </script>
 <title>微信公众号管理系统 v1.0</title>
 <meta name="keywords" content="H-ui.admin v3.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
@@ -31,22 +63,22 @@ function refresh() {
 <div class="header"></div>
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
-    <form class="form form-horizontal" action="login" method="post">
+    <form class="form form-horizontal">
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-xs-8">
-          <input id="" name="username" type="text" placeholder="账户" class="input-text size-L">
+          <input id="username" name="username" type="text" placeholder="账户" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
         <div class="formControls col-xs-8">
-          <input id="" name="password" type="password" placeholder="密码" class="input-text size-L">
+          <input id="password" name="password" type="password" placeholder="密码" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
-          <input name="code" class="input-text size-L" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;">
+          <input id="code" name="code" class="input-text size-L" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;">
           <img id="mathnum" onclick="refresh()" style="width: 120px; height: 40px;" src="randCode" > <a id="kanbuq" onclick="refresh()" href="javascript:void();">看不清，换一张</a> </div>
       </div>
       <div class="row cl">
@@ -58,7 +90,7 @@ function refresh() {
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
-          <input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
+          <input onclick="login()" name="" type="button" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
           <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
         </div>
       </div>
@@ -68,5 +100,6 @@ function refresh() {
 <div class="footer">Copyright 十五度工作室 by programafter.com v1.0</div>
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
 </body>
 </html>

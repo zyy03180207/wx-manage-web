@@ -7,6 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONObject;
+import com.program.wxmanage.Global;
+
 public class LoginInterceptor implements HandlerInterceptor {
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -14,13 +17,13 @@ public class LoginInterceptor implements HandlerInterceptor {
 		// TODO Auto-generated method stub
 		String url = request.getRequestURI();
 		HttpSession session = request.getSession();
-//		AdminUser adminUser = (AdminUser) session.getAttribute(Global.USER_INFO);
+		JSONObject userJson = (JSONObject) session.getAttribute(Global.USER_INFO);
 //		List<Secqurity> secqurities = (List<Secqurity>) session.getAttribute(Global.SECQURITIES);
 		//是否登录验证,先判断是不是login请求，然后在判断是否登录过
 		if(url.indexOf("login") >= 0) {
 			return true;
 		}
-		if(session == null) {
+		if(userJson == null) {
 			response.sendRedirect(request.getContextPath() + "/login");
 			return false;
 		}
