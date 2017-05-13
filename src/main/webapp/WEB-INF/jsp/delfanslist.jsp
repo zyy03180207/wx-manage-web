@@ -92,7 +92,7 @@
 					form = layui.form();
 					
 				paging.init({
-					url: 'fansList', //地址
+					url: 'fans/fansList', //地址
 					elem: '#content', //内容容器
 					params: { //发送到服务端的参数
 					},

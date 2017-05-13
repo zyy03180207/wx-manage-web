@@ -1,6 +1,7 @@
 D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\controller\AdminController.java
 D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\util\StringUtil.java
 D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\BaseController.java
+D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\controller\FansController.java
 D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\Global.java
 D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\service\RemoteApiService.java
 D:\workspace2017\my\wx-manage-web\src\main\java\com\program\wxmanage\controller\IndexController.java

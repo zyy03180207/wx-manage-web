@@ -61,14 +61,14 @@
 									</a>
 								</dd>
 								<dd>
-									<a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+									<a href="outLogin"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
 								</dd>
 							</dl>
 						</li>
 					</ul>
 					<ul class="layui-nav admin-header-item-mobile">
 						<li class="layui-nav-item">
-							<a href="login.html"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+							<a href="outLogin"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
 						</li>
 					</ul>
 				</div>
@@ -136,49 +136,28 @@
 				});
 				navs = [{
 					"title": "粉丝管理",
-					"icon": "fa-cubes",
-					"spread": true,
+					"icon": "fa-users",
+					"spread": false,
 					"children": [{
 						"title": "粉丝列表",
-						"icon": "&#xe641;",
 						"href": "fansList"
 					}, {
 						"title": "删除粉丝",
-						"icon": "&#xe63c;",
-						"href": "form.html"
-					}, {
-						"title": "表格",
-						"icon": "&#xe63c;",
-						"href": "table.html"
-					}, {
-						"title": "导航",
-						"icon": "&#xe609;",
-						"href": "nav.html"
-					}, {
-						"title": "辅助性元素",
-						"icon": "&#xe60c;",
-						"href": "auxiliar.html"
+						"href": "delFansList"
 					}]
 				}, {
-					"title": "组件",
-					"icon": "fa-cogs",
+					"title": "管理员管理",
+					"icon": "fa-user",
 					"spread": false,
 					"children": [{
-						"title": "BTable",
-						"icon": "fa-table",
-						"href": "btable.html"
+						"title": "角色管理",
+						"href": "adminRole"
 					}, {
-						"title": "Navbar组件",
-						"icon": "fa-navicon",
-						"href": "navbar.html"
+						"title": "权限管理",
+						"href": "adminAuthor"
 					}, {
-						"title": "Tab组件",
-						"icon": "&#xe62a;",
-						"href": "tab.html"
-					}, {
-						"title": "Laytpl+Laypage",
-						"icon": "&#xe628;",
-						"href": "paging.html"
+						"title": "管理员列表",
+						"href": "adminList"
 					}]
 				}, {
 					"title": "第三方组件",

@@ -107,8 +107,7 @@
 			});
 			function randomCode() { 
 		   		 document.getElementById("imc").src="randCode?r="+Math.random(); 
-				} 
-			
+			} 
 		</script>
 </body>
 

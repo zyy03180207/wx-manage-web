@@ -19,11 +19,11 @@
 				<a href="javascript:;" class="layui-btn layui-btn-small" id="add">
 					<i class="layui-icon">&#xe608;</i> 添加管理员
 				</a>
-				<a href="#" class="layui-btn layui-btn-small" id="import">
-					<i class="layui-icon">&#xe608;</i> 导入信息
+				<a href="#" class="layui-btn layui-btn-small" id="getSelected">
+					<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i> 批量开启
 				</a>
-				<a href="#" class="layui-btn layui-btn-small">
-					<i class="fa fa-shopping-cart" aria-hidden="true"></i> 导出信息
+				<a href="#" class="layui-btn layui-btn-small" id="getSelected">
+					<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i> 批量停用
 				</a>
 				<a href="#" class="layui-btn layui-btn-small" id="getSelected">
 					<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i> 批量删除
@@ -45,7 +45,7 @@
 								<th>邮箱</th>
 								<th>角色</th>
 								<th>加入时间</th>
-								<th>是否已启用</th>
+								<th>是否启用</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -65,19 +65,17 @@
 			{{# layui.each(d.list, function(index, item){ }}
 			<tr>
 				<td><input type="checkbox" lay-skin="primary"></td>
-				<td>{{ item.cid }}</td>
-				<td>{{ item.nickname }}</td>
-				{{# if(item.sex==1) { }}
-				<td>男</td>
-				{{# } else if(item.sex==2) { }}
-				<td>女</td>
+				<td>{{ item.id }}</td>
+				<td>{{ item.username }}</td>
+				<td>{{ item.phone }}</td>
+				<td>{{ item.email }}</td>
+				<td>{{ item.rname }}</td>
+				<td>{{ item.crtime }}</td>
+				{{# if(item.state=='0') { }}
+				<td class="td_status"><span class="layui-btn layui-btn-danger layui-btn-mini">已停用</span></td>
 				{{# } else { }}
-				<td>未知</td>
+				<td><span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
 				{{# } }}
-				{{# if(item.groupid==0) { }}
-				<td>未分组</td>
-				{{# } }}
-				<td>{{ item.subscribe_time }}</td>
 				<td>
 					<a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
 					<a href="javascript:;" data-name="{{ item.cid }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
@@ -100,7 +98,7 @@
 					form = layui.form();
 					
 				paging.init({
-					url: 'fansList', //地址
+					url: 'admin/adminList', //地址
 					elem: '#content', //内容容器
 					params: { //发送到服务端的参数
 					},
@@ -108,7 +106,7 @@
 					tempElem: '#tpl', //模块容器
 					pageConfig: { //分页参数配置
 						elem: '#paged', //分页容器
-						pageSize: 20 //分页大小
+						pageSize: 10 //分页大小
 					},
 					success: function() { //渲染成功的回调
 						//alert('渲染成功');
@@ -170,7 +168,7 @@
 							type: 1,
 							title: '添加表单',
 							content: form,
-							btn: ['保存', '取消'],
+							btn: ['添加', '取消'],
 							shade: false,
 							offset: ['100px', '30%'],
 							area: ['600px', '400px'],

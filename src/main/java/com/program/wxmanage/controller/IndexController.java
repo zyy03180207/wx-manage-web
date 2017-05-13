@@ -135,32 +135,6 @@ public class IndexController extends BaseController {
 		return andView;
 	}
 	
-	@RequestMapping(value = "fansList", method = RequestMethod.POST)
-	public @ResponseBody String fansListPost(HttpServletRequest request, HttpServletResponse response) {
-		String pageIndex = getPara(request, "pageIndex");
-		String pageSize = getPara(request, "pageSize");
-		JSONObject object = new JSONObject();
-		object.put("pageIndex", pageIndex);
-		object.put("pageSize", pageSize);
-		String json = ServiceApiHelper.formatParam("tb_fanslist", object.toJSONString(), Global.KEY);
-		String resultStr = remoteApiService.getWXAip().execute(json);
-		ServiceResult result = ServiceApiHelper.parseResult(resultStr);
-		JSONObject resJson = new JSONObject();
-		resJson.put("code", 0);
-		if(result.isSucc()){
-			String data = result.getData();
-			JSONObject resData = JSONObject.parseObject(data);
-			resJson.put("msg", result.getMesg());
-			resJson.put("list", resData.get("list"));
-			resJson.put("count", resData.get("count"));
-		} else {
-			resJson.put("msg", result.getMesg());
-			resJson.put("list", new JSONArray());
-			resJson.put("count", 0);
-		}
-		return StringUtil.utfToIso(resJson.toJSONString());
-	}
-	
 	@RequestMapping(value = "delFansList",method = RequestMethod.GET)
 	public ModelAndView delFansList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView andView = createMV("delfanslist");
