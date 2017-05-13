@@ -1,346 +1,213 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport"
-	content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="Bookmark" href="/favicon.ico">
-<link rel="Shortcut Icon" href="/favicon.ico" />
-<!--[if lt IE 9]>
-<script type="text/javascript" src="lib/html5shiv.js"></script>
-<script type="text/javascript" src="lib/respond.min.js"></script>
-<![endif]-->
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath() %>/static/h-ui/css/H-ui.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath() %>/static/h-ui.admin/css/H-ui.admin.css" />
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath() %>/lib/Hui-iconfont/1.0.8/iconfont.css" />
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath() %>/static/h-ui.admin/skin/default/skin.css" id="skin" />
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath() %>/static/h-ui.admin/css/style.css" />
-<!--[if IE 6]>
-<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
-<script>DD_belatedPNG.fix('*');</script>
-<![endif]-->
-<title>微信公众号管理系统</title>
-<meta name="keywords"
-	content="H-ui.admin v3.0,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
-<meta name="description"
-	content="H-ui.admin v3.0，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
-</head>
-<body>
-	<header class="navbar-wrapper">
-	<div class="navbar navbar-fixed-top">
-		<div class="container-fluid cl">
-			<a class="logo navbar-logo f-l mr-10 hidden-xs"
-				href="/aboutHui.shtml">微信公众号管理系统</a> <a
-				class="logo navbar-logo-m f-l mr-10 visible-xs"
-				href="/aboutHui.shtml">H-ui</a> <span
-				class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span> <a
-				aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs"
-				href="javascript:;">&#xe667;</a>
-			<nav class="nav navbar-nav">
-			<ul class="cl">
-				<li class="dropDown dropDown_hover"><a href="javascript:;"
-					class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i
-						class="Hui-iconfont">&#xe6d5;</i></a>
-					<ul class="dropDown-menu menu radius box-shadow">
-						<li><a href="javascript:;"
-							onclick="article_add('添加资讯','article-add.html')"><i
-								class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
-						<li><a href="javascript:;"
-							onclick="picture_add('添加资讯','picture-add.html')"><i
-								class="Hui-iconfont">&#xe613;</i> 图片</a></li>
-						<li><a href="javascript:;"
-							onclick="product_add('添加资讯','product-add.html')"><i
-								class="Hui-iconfont">&#xe620;</i> 产品</a></li>
-						<li><a href="javascript:;"
-							onclick="member_add('添加用户','member-add.html','','510')"><i
-								class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
-					</ul></li>
-			</ul>
-			</nav>
-			<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
-			<ul class="cl">
-				<li>超级管理员</li>
-				<li class="dropDown dropDown_hover"><a href="#"
-					class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
-					<ul class="dropDown-menu menu radius box-shadow">
-						<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
-						<li><a href="#">切换账户</a></li>
-						<li><a href="#">退出</a></li>
-					</ul></li>
-				<li id="Hui-msg"><a href="#" title="消息"><span
-						class="badge badge-danger">1</span><i class="Hui-iconfont"
-						style="font-size: 18px">&#xe68a;</i></a></li>
-				<li id="Hui-skin" class="dropDown right dropDown_hover"><a
-					href="javascript:;" class="dropDown_A" title="换肤"><i
-						class="Hui-iconfont" style="font-size: 18px">&#xe62a;</i></a>
-					<ul class="dropDown-menu menu radius box-shadow">
-						<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
-						<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
-						<li><a href="javascript:;" data-val="green" title="绿色">绿色</a></li>
-						<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
-						<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
-						<li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>
-					</ul></li>
-			</ul>
-			</nav>
-		</div>
-	</div>
-	</header>
-	<aside class="Hui-aside">
-	<div class="menu_dropdown bk_2">
-		<dl id="menu-article">
-			<dt>
-				<i class="Hui-iconfont">&#xe616;</i> 粉丝管理<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-			</dt>
-			<dd>
-				<ul>
-					<li><a data-href="<%=request.getContextPath() %>/fansList" data-title="粉丝列表"
-						href="javascript:void(0)">粉丝列表</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-picture">
-			<dt>
-				<i class="Hui-iconfont">&#xe613;</i> 图片管理<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-			</dt>
-			<dd>
-				<ul>
-					<li><a data-href="picture-list.html" data-title="图片管理"
-						href="javascript:void(0)">图片管理</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-product">
-			<dt>
-				<i class="Hui-iconfont">&#xe620;</i> 产品管理<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-			</dt>
-			<dd>
-				<ul>
-					<li><a data-href="product-brand.html" data-title="品牌管理"
-						href="javascript:void(0)">品牌管理</a></li>
-					<li><a data-href="product-category.html" data-title="分类管理"
-						href="javascript:void(0)">分类管理</a></li>
-					<li><a data-href="product-list.html" data-title="产品管理"
-						href="javascript:void(0)">产品管理</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-comments">
-			<dt>
-				<i class="Hui-iconfont">&#xe622;</i> 评论管理<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-			</dt>
-			<dd>
-				<ul>
-					<li><a data-href="http://h-ui.duoshuo.com/admin/"
-						data-title="评论列表" href="javascript:;">评论列表</a></li>
-					<li><a data-href="<%=request.getContextPath() %>/feedbacklist" data-title="意见反馈"
-						href="javascript:void(0)">意见反馈</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-member">
-			<dt>
-				<i class="Hui-iconfont">&#xe60d;</i> 会员管理<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-			</dt>
-			<dd>
-				<ul>
-					<li><a data-href="<%=request.getContextPath() %>/memberlist" data-title="会员列表"
-						href="javascript:;">会员列表</a></li>
-					<li><a data-href="<%=request.getContextPath() %>/memberdel" data-title="删除的会员"
-						href="javascript:;">删除的会员</a></li>
-					<li><a data-href="<%=request.getContextPath() %>/memberlevel" data-title="等级管理"
-						href="javascript:;">等级管理</a></li>
-					<li><a data-href="member-scoreoperation.html"
-						data-title="积分管理" href="javascript:;">积分管理</a></li>
-					<li><a data-href="member-record-browse.html" data-title="浏览记录"
-						href="javascript:void(0)">浏览记录</a></li>
-					<li><a data-href="member-record-download.html"
-						data-title="下载记录" href="javascript:void(0)">下载记录</a></li>
-					<li><a data-href="member-record-share.html" data-title="分享记录"
-						href="javascript:void(0)">分享记录</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-admin">
-			<dt>
-				<i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-			</dt>
-			<dd>
-				<ul>
-					<li><a data-href="<%=request.getContextPath() %>/adminrole" data-title="角色管理"
-						href="javascript:void(0)">角色管理</a></li>
-					<li><a data-href="<%=request.getContextPath() %>/adminpermission" data-title="权限管理"
-						href="javascript:void(0)">权限管理</a></li>
-					<li><a data-href="<%=request.getContextPath() %>/adminlist" data-title="管理员列表"
-						href="javascript:void(0)">管理员列表</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-tongji">
-			<dt>
-				<i class="Hui-iconfont">&#xe61a;</i> 系统统计<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-			</dt>
-			<dd>
-				<ul>
-					<li><a data-href="charts1" data-title="折线图"
-						href="javascript:void(0)">折线图</a></li>
-					<li><a data-href="charts2" data-title="时间轴折线图"
-						href="javascript:void(0)">时间轴折线图</a></li>
-					<li><a data-href="charts3" data-title="区域图"
-						href="javascript:void(0)">区域图</a></li>
-					<li><a data-href="charts4" data-title="柱状图"
-						href="javascript:void(0)">柱状图</a></li>
-					<li><a data-href="charts5" data-title="饼状图"
-						href="javascript:void(0)">饼状图</a></li>
-					<li><a data-href="charts6" data-title="3D柱状图"
-						href="javascript:void(0)">3D柱状图</a></li>
-					<li><a data-href="charts7" data-title="3D饼状图"
-						href="javascript:void(0)">3D饼状图</a></li>
-				</ul>
-			</dd>
-		</dl>
-		<dl id="menu-system">
-			<dt>
-				<i class="Hui-iconfont">&#xe62e;</i> 系统管理<i
-					class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-			</dt>
-			<dd>
-				<ul>
-					<li><a data-href="<%=request.getContextPath() %>/systembase" data-title="系统设置"
-						href="javascript:void(0)">系统设置</a></li>
-					<li><a data-href="<%=request.getContextPath() %>/systemcategory" data-title="栏目管理"
-						href="javascript:void(0)">栏目管理</a></li>
-					<li><a data-href="<%=request.getContextPath() %>/systemdata" data-title="数据字典"
-						href="javascript:void(0)">数据字典</a></li>
-					<li><a data-href="<%=request.getContextPath() %>/systemshielding" data-title="屏蔽词"
-						href="javascript:void(0)">屏蔽词</a></li>
-					<li><a data-href="<%=request.getContextPath() %>/systemlog" data-title="系统日志"
-						href="javascript:void(0)">系统日志</a></li>
-				</ul>
-			</dd>
-		</dl>
-	</div>
-	</aside>
-	<div class="dislpayArrow hidden-xs">
-		<a class="pngfix" href="javascript:void(0);"
-			onClick="displaynavbar(this)"></a>
-	</div>
-	<section class="Hui-article-box">
-	<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
-		<div class="Hui-tabNav-wp">
-			<ul id="min_title_list" class="acrossTab cl">
-				<li class="active"><span title="欢迎页面" data-href="<%=request.getContextPath()%>/welcome">欢迎页面</span>
-					<em></em></li>
-			</ul>
-		</div>
-		<div class="Hui-tabNav-more btn-group">
-			<a id="js-tabNav-prev" class="btn radius btn-default size-S"
-				href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a
-				id="js-tabNav-next" class="btn radius btn-default size-S"
-				href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a>
-		</div>
-	</div>
-	<div id="iframe_box" class="Hui-article">
-		<div class="show_iframe">
-			<div style="display: none" class="loading"></div>
-			<iframe scrolling="yes" frameborder="0" src="welcome.html"></iframe>
-		</div>
-	</div>
-	</section>
+	<head>
+		<meta charset="utf-8">
+		<title>微信公众号管理系统 v1.0</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
 
-	<div class="contextMenu" id="Huiadminmenu">
-		<ul>
-			<li id="closethis">关闭当前</li>
-			<li id="closeall">关闭全部</li>
-		</ul>
-	</div>
-	<!--_footer 作为公共模版分离出去-->
-	<script type="text/javascript" src="<%=request.getContextPath() %>/lib/jquery/1.9.1/jquery.min.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath() %>/lib/layer/2.4/layer.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath() %>/static/h-ui/js/H-ui.min.js"></script>
-	<script type="text/javascript" src="<%=request.getContextPath() %>/static/h-ui.admin/js/H-ui.admin.js"></script>
-	<!--/_footer 作为公共模版分离出去-->
+		<link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="css/global.css" media="all">
+		<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
 
-	<!--请在下方写此页面业务相关的脚本-->
-	<script type="text/javascript"
-		src="<%=request.getContextPath() %>/lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			/*$("#min_title_list li").contextMenu('Huiadminmenu', {
-				bindings: {
-					'closethis': function(t) {
-						console.log(t);
-						if(t.find("i")){
-							t.find("i").trigger("click");
-						}		
-					},
-					'closeall': function(t) {
-						alert('Trigger was '+t.id+'\nAction was Email');
-					},
-				}
-			});*/
-		});
-		/*个人信息*/
-		function myselfinfo() {
-			layer.open({
-				type : 1,
-				area : [ '300px', '200px' ],
-				fix : false, //不固定
-				maxmin : true,
-				shade : 0.4,
-				title : '查看信息',
-				content : '<div>管理员信息</div>'
-			});
-		}
+	</head>
 
-		/*资讯-添加*/
-		function article_add(title, url) {
-			var index = layer.open({
-				type : 2,
-				title : title,
-				content : url
-			});
-			layer.full(index);
-		}
-		/*图片-添加*/
-		function picture_add(title, url) {
-			var index = layer.open({
-				type : 2,
-				title : title,
-				content : url
-			});
-			layer.full(index);
-		}
-		/*产品-添加*/
-		function product_add(title, url) {
-			var index = layer.open({
-				type : 2,
-				title : title,
-				content : url
-			});
-			layer.full(index);
-		}
-		/*用户-添加*/
-		function member_add(title, url, w, h) {
-			layer_show(title, url, w, h);
-		}
-	</script>
-</body>
+	<body>
+		<div class="layui-layout layui-layout-admin" style="border-bottom: solid 5px #1aa094;">
+			<div class="layui-header header header-demo">
+				<div class="layui-main">
+					<div class="admin-login-box">
+						<a class="logo" style="left: 0;" href="index">
+							<span style="font-size: 22px;">微信公众号</span>
+						</a>
+						<div class="admin-side-toggle">
+							<i class="fa fa-bars" aria-hidden="true"></i>
+						</div>
+						<div class="admin-side-full">
+							<i class="fa fa-life-bouy" aria-hidden="true"></i>
+						</div>
+					</div>
+					<ul class="layui-nav admin-header-item">
+						<li class="layui-nav-item">
+							<a href="javascript:;">清除缓存</a>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;">浏览网站</a>
+						</li>
+						<li class="layui-nav-item" id="video1">
+							<a href="javascript:;">视频</a>
+						</li>
+						<li class="layui-nav-item">
+							<a href="javascript:;" class="admin-header-user">
+								<img src="images/0.jpg" />
+								<span>beginner</span>
+							</a>
+							<dl class="layui-nav-child">
+								<dd>
+									<a href="javascript:;"><i class="fa fa-user-circle" aria-hidden="true"></i> 个人信息</a>
+								</dd>
+								<dd>
+									<a href="javascript:;"><i class="fa fa-gear" aria-hidden="true"></i> 设置</a>
+								</dd>
+								<dd id="lock">
+									<a href="javascript:;">
+										<i class="fa fa-lock" aria-hidden="true" style="padding-right: 3px;padding-left: 1px;"></i> 锁屏 (Alt+L)
+									</a>
+								</dd>
+								<dd>
+									<a href="outLogin"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+								</dd>
+							</dl>
+						</li>
+					</ul>
+					<ul class="layui-nav admin-header-item-mobile">
+						<li class="layui-nav-item">
+							<a href="outLogin"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="layui-side layui-bg-black" id="admin-side">
+				<div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side"></div>
+			</div>
+			<div class="layui-body" style="bottom: 0;border-left: solid 2px #1AA094;" id="admin-body">
+				<div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab">
+					<ul class="layui-tab-title">
+						<li class="layui-this">
+							<i class="fa fa-dashboard" aria-hidden="true"></i>
+							<cite>控制面板</cite>
+						</li>
+					</ul>
+					<div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
+						<div class="layui-tab-item layui-show">
+							<iframe src="main"></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="layui-footer footer footer-demo" id="admin-footer">
+				<div class="layui-main">
+					<p>2017 &copy;
+						<a href="http://m.zhengjinfan.cn/">programafter.com</a> 十五度工作室
+					</p>
+				</div>
+			</div>
+			<div class="site-tree-mobile layui-hide">
+				<i class="layui-icon">&#xe602;</i>
+			</div>
+			<div class="site-mobile-shade"></div>
+			
+			<!--锁屏模板 start-->
+			<script type="text/template" id="lock-temp">
+				<div class="admin-header-lock" id="lock-box">
+					<div class="admin-header-lock-img">
+						<img src="images/0.jpg"/>
+					</div>
+					<div class="admin-header-lock-name" id="lockUserName">beginner</div>
+					<input type="text" class="admin-header-lock-input" value="输入密码解锁.." name="lockPwd" id="lockPwd" />
+					<button class="layui-btn layui-btn-small" id="unlock">解锁</button>
+				</div>
+			</script>
+			<!--锁屏模板 end -->
+			<script type="text/javascript" src="plugins/layui/layui.js"></script>
+			<script type="text/javascript" src="datas/nav.js"></script>
+			<script src="js/index.js"></script>
+			<script>
+				layui.use('layer', function() {
+					var $ = layui.jquery,
+						layer = layui.layer;
+
+					$('#video1').on('click', function() {
+						layer.open({
+							title: 'YouTube',
+							maxmin: true,
+							type: 2,
+							content: 'video.html',
+							area: ['800px', '500px']
+						});
+					});
+
+				});
+				navs = [{
+					"title": "粉丝管理",
+					"icon": "fa-users",
+					"spread": false,
+					"children": [{
+						"title": "粉丝列表",
+						"href": "fansList"
+					}, {
+						"title": "删除粉丝",
+						"href": "delFansList"
+					}]
+				}, {
+					"title": "管理员管理",
+					"icon": "fa-user",
+					"spread": false,
+					"children": [{
+						"title": "角色管理",
+						"href": "adminRole"
+					}, {
+						"title": "权限管理",
+						"href": "adminAuthor"
+					}, {
+						"title": "管理员列表",
+						"href": "adminList"
+					}]
+				}, {
+					"title": "第三方组件",
+					"icon": "&#x1002;",
+					"spread": false,
+					"children": [{
+						"title": "iCheck组件",
+						"icon": "fa-check-square-o",
+						"href": "icheck.html"
+					}]
+				}, {
+					"title": "地址本",
+					"icon": "fa-address-book",
+					"href": "",
+					"spread": false,
+					"children": [{
+						"title": "Github",
+						"icon": "fa-github",
+						"href": "https://www.github.com/"
+					}, {
+						"title": "QQ",
+						"icon": "fa-qq",
+						"href": "http://www.qq.com/"
+					}, {
+						"title": "Fly社区",
+						"icon": "&#xe609;",
+						"href": "http://fly.layui.com/"
+					}, {
+						"title": "新浪微博",
+						"icon": "fa-weibo",
+						"href": "http://weibo.com/"
+					}]
+				}, {
+					"title": "这是一级导航",
+					"icon": "fa-stop-circle",
+					"href": "https://www.baidu.com",
+					"spread": false
+				}, {
+					"title": "其他",
+					"icon": "fa-stop-circle",
+					"href": "#",
+					"spread": false,
+					"children": [{
+						"title": "子窗体中打开选项卡",
+						"icon": "fa-github",
+						"href": "cop.html"
+					}]
+				}];
+			</script>
+		</div>
+	</body>
+
 </html>

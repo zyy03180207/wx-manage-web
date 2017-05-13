@@ -248,7 +248,7 @@ public class BaseController {
 	
 	protected static BufferedImage generateImage(String s) {
 		try {
-			int width = 120;
+			int width = 80;
 			int height = 25;
 			// 取得一个4位随机字母数字字符串
 			BufferedImage image = new BufferedImage(width, height,

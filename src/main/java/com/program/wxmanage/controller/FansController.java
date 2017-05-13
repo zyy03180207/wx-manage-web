@@ -1,0 +1,14 @@
+package com.program.wxmanage.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.program.wxmanage.BaseController;
+
+@Controller
+@RequestMapping(value = "/fans")
+public class FansController extends BaseController {
+
+	
+	
+}
