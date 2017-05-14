@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>粉丝列表</title>
+		<title>角色管理</title>
 		<link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
 		<link rel="stylesheet" href="css/global.css" media="all">
 		<link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
@@ -39,11 +39,9 @@
 						<thead>
 							<tr>
 								<th style="width: 30px;"><input type="checkbox" lay-filter="allselector" lay-skin="primary"></th>
-								<th>昵称</th>
 								<th>ID</th>
-								<th>性别</th>
-								<th>所属组</th>
-								<th>关注时间</th>
+								<th>角色名</th>
+								<th>描述</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -63,19 +61,9 @@
 			{{# layui.each(d.list, function(index, item){ }}
 			<tr>
 				<td><input type="checkbox" lay-skin="primary"></td>
-				<td>{{ item.nickname }}</td>
-				<td>{{ item.openid }}</td>
-				{{# if(item.sex==1) { }}
-				<td>男</td>
-				{{# } else if(item.sex==2) { }}
-				<td>女</td>
-				{{# } else { }}
-				<td>未知</td>
-				{{# } }}
-				{{# if(item.groupid==0) { }}
-				<td>未分组</td>
-				{{# } }}
-				<td>{{ item.subscribe_time }}</td>
+				<td>{{ item.id }}</td>
+				<td>{{ item.name }}</td>
+				<td>{{ item.introduce }}</td>
 				<td>
 					<a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
 					<a href="javascript:;" data-name="{{ item.cid }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
@@ -98,7 +86,7 @@
 					form = layui.form();
 					
 				paging.init({
-					url: 'fansList', //地址
+					url: 'role/roleList', //地址
 					elem: '#content', //内容容器
 					params: { //发送到服务端的参数
 					},
@@ -106,7 +94,7 @@
 					tempElem: '#tpl', //模块容器
 					pageConfig: { //分页参数配置
 						elem: '#paged', //分页容器
-						pageSize: 20 //分页大小
+						pageSize: 10 //分页大小
 					},
 					success: function() { //渲染成功的回调
 						//alert('渲染成功');

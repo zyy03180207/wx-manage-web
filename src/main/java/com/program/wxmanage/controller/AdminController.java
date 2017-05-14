@@ -17,6 +17,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.program.wxmanage.BaseController;
 import com.program.wxmanage.Global;
+import com.program.wxmanage.param.AjaxResult;
 import com.program.wxmanage.service.RemoteApiService;
 import com.program.wxmanage.util.StringUtil;
 
@@ -33,11 +34,64 @@ public class AdminController extends BaseController {
 	
 	@RequestMapping(value = "adminAdd", method = RequestMethod.POST)
 	public void adminadd(HttpServletRequest request, HttpServletResponse response) {
+		AjaxResult ajaxResult = new AjaxResult();
 		String username = getPara(request, "username");
 		String password = getPara(request, "password");
 		String phone = getPara(request, "phone");
 		String email = getPara(request, "email");
-		
+		String roleId = getPara(request, "role");
+		String state = getPara(request, "switch");
+		if(StringUtil.isEmpty(username)) {
+			ajaxResult.setMesg("请输入登录名");
+			this.write(response, ajaxResult);
+			return;
+		}
+		if(StringUtil.isEmpty(password)) {
+			ajaxResult.setMesg("请输入登录密码");
+			this.write(response, ajaxResult);
+			return;
+		}
+		if(StringUtil.isEmpty(phone)) {
+			ajaxResult.setMesg("请输入手机号");
+			this.write(response, ajaxResult);
+			return;
+		}
+		if(StringUtil.isEmpty(email)) {
+			ajaxResult.setMesg("请输入邮箱");
+			this.write(response, ajaxResult);
+			return;
+		}
+		if(StringUtil.isEmpty(roleId) && roleId.equals("0")) {
+			ajaxResult.setMesg("请选择用户角色");
+			this.write(response, ajaxResult);
+			return;
+		}
+		if(StringUtil.isEmpty(state)) {
+			state = "0";
+		} else {
+			state = "1";
+		}
+		JSONObject object = new JSONObject();
+		object.put("username", username);
+		object.put("password", md5(password));
+		object.put("phone", phone);
+		object.put("email", email);
+		object.put("roleId", roleId);
+		object.put("state", state);
+		String json = ServiceApiHelper.formatParam("tb_add_admin", object.toJSONString(), Global.KEY);
+		String resultStr = remoteApiService.getWXAip().execute(json);
+		ServiceResult result = ServiceApiHelper.parseResult(resultStr);
+		if(result.isSucc()) {
+			ajaxResult.setSucc(true);
+			ajaxResult.setMesg(result.getMesg());
+			this.write(response, ajaxResult);
+			return;
+		} else {
+			ajaxResult.setSucc(false);
+			ajaxResult.setMesg(result.getMesg());
+			this.write(response, ajaxResult);
+			return;
+		}
 	}
 	
 	@RequestMapping(value = "adminAdd", method = RequestMethod.GET)

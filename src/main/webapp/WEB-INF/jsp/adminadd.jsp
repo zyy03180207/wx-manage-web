@@ -37,7 +37,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">选择角色</label>
 			<div class="layui-input-block">
-				<select name="city" lay-verify="required">
+				<select name="role" lay-verify="required">
 					<option value=""></option>
 					<%for(TbRole role : roles) { %>
 						<option value="<%=role.getId()%>"><%=role.getName()%></option>
@@ -48,7 +48,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">是否开启</label>
 			<div class="layui-input-block">
-				<input type="checkbox" name="switch" lay-skin="switch">
+				<input type="checkbox" name="switch" lay-skin="switch" lay-verify="required">
 			</div>
 		</div>
 		<div class="layui-form-item layui-form-text">
