@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -34,7 +35,7 @@
 							<tr>
 								<th style="width: 30px;"><input type="checkbox" lay-filter="allselector" lay-skin="primary"></th>
 								<th>昵称</th>
-								<th>ID</th>
+								<th>OpenID</th>
 								<th>性别</th>
 								<th>所属组</th>
 								<th>关注时间</th>

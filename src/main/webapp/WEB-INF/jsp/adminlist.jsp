@@ -82,7 +82,7 @@
 				{{# } }}
 				<td>
 					<a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
-					<a href="javascript:;" data-name="{{ item.cid }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
+					<a href="javascript:;" data-name="{{ item.id }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
 					<a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
 				</td>
 			</tr>
@@ -205,7 +205,7 @@
 										data: data.field,
 										success:function(data) {
 											if(data.succ) {
-												layerTips.msg(data.mesg);
+												layerTips.msg(data.mesg, {icon: 6});
 												layerTips.close(index);
 												location.reload(); //刷新
 											} else {

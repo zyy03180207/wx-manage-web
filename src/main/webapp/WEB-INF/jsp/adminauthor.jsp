@@ -17,16 +17,10 @@
 
 			<blockquote class="layui-elem-quote">
 				<a href="javascript:;" class="layui-btn layui-btn-small" id="add">
-					<i class="layui-icon">&#xe608;</i> 添加信息
-				</a>
-				<a href="#" class="layui-btn layui-btn-small" id="import">
-					<i class="layui-icon">&#xe608;</i> 导入信息
-				</a>
-				<a href="#" class="layui-btn layui-btn-small">
-					<i class="fa fa-shopping-cart" aria-hidden="true"></i> 导出信息
+					<i class="layui-icon">&#xe608;</i> 添加权限
 				</a>
 				<a href="#" class="layui-btn layui-btn-small" id="getSelected">
-					<i class="fa fa-shopping-cart" aria-hidden="true"></i> 获取全选信息
+					<i class="fa fa-shopping-cart" aria-hidden="true"></i> 批量删除
 				</a>
 				<a href="javascript:;" class="layui-btn layui-btn-small" id="search">
 					<i class="layui-icon">&#xe615;</i> 搜索
@@ -39,11 +33,11 @@
 						<thead>
 							<tr>
 								<th style="width: 30px;"><input type="checkbox" lay-filter="allselector" lay-skin="primary"></th>
-								<th>昵称</th>
 								<th>ID</th>
-								<th>性别</th>
-								<th>所属组</th>
-								<th>关注时间</th>
+								<th>路由地址</th>
+								<th>权限名称</th>
+								<th>描述</th>
+								<th>是否菜单</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -170,7 +164,7 @@
 							content: form,
 							btn: ['保存', '取消'],
 							shade: false,
-							offset: ['100px', '30%'],
+							offset: ['20px', '20%'],
 							area: ['600px', '400px'],
 							zIndex: 19950924,
 							maxmin: true,
