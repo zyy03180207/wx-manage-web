@@ -1,5 +1,7 @@
 package com.program.wxmanage.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,6 +22,7 @@ import com.program.wxmanage.util.StringUtil;
 
 import microservice.api.ServiceApiHelper;
 import microservice.api.ServiceResult;
+import microservice.online.entity.TbRole;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -28,9 +31,30 @@ public class AdminController extends BaseController {
 	@Autowired
 	RemoteApiService remoteApiService;
 	
-	@RequestMapping(value = "adminadd", method = RequestMethod.GET)
-	public ModelAndView adminadd() {
-		ModelAndView andView = createMV("admin-add");
+	@RequestMapping(value = "adminAdd", method = RequestMethod.POST)
+	public void adminadd(HttpServletRequest request, HttpServletResponse response) {
+		String username = getPara(request, "username");
+		String password = getPara(request, "password");
+		String phone = getPara(request, "phone");
+		String email = getPara(request, "email");
+		
+	}
+	
+	@RequestMapping(value = "adminAdd", method = RequestMethod.GET)
+	public ModelAndView adminAdd() {
+		ModelAndView andView = new ModelAndView("adminadd");
+		JSONObject object = new JSONObject();
+		String json = ServiceApiHelper.formatParam("tb_rolelist", object.toJSONString(), Global.KEY);
+		String resultStr = remoteApiService.getWXAip().execute(json);
+		ServiceResult result = ServiceApiHelper.parseResult(resultStr);
+		if(result.isSucc()) {
+			JSONObject jsonObject = JSONObject.parseObject(result.getData());
+			JSONArray array = jsonObject.getJSONArray("list");
+			List<TbRole> roles = JSONArray.parseArray(array.toJSONString(), TbRole.class);
+			andView.addObject("roles", roles);
+		} else {
+			andView.addObject("role", null);
+		}
 		return andView;
 	}
 	

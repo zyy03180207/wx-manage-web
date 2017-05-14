@@ -24,7 +24,7 @@
 				<div class="layui-main">
 					<div class="admin-login-box">
 						<a class="logo" style="left: 0;" href="index">
-							<span style="font-size: 22px;">微信公众号</span>
+							<span style="font-size: 20px;">微信公众号管理系统</span>
 						</a>
 						<div class="admin-side-toggle">
 							<i class="fa fa-bars" aria-hidden="true"></i>
@@ -136,7 +136,7 @@
 				});
 				navs = [{
 					"title": "粉丝管理",
-					"icon": "fa-users",
+					"icon": "fa-user-secret",
 					"spread": false,
 					"children": [{
 						"title": "粉丝列表",
