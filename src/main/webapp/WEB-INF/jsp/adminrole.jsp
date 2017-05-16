@@ -59,7 +59,7 @@
 				<td>{{ item.name }}</td>
 				<td>{{ item.introduce }}</td>
 				<td>
-					<a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
+					<a href="javascript:;" data-name="{{ item.id }}" target="_blank" data-opt="fen" class="layui-btn layui-btn-normal layui-btn-mini">分配权限</a>
 					<a href="javascript:;" data-name="{{ item.id }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
 					<a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
 				</td>
@@ -118,6 +118,23 @@
 								layer.msg($(this).data('name'));
 							});
 
+							$that.children('td:last-child').children('a[data-opt=fen]').on('click', function() {
+								layer.msg($(this).data('name'));
+							});
+							
+							$that.children('td:last-child').children('a[data-opt=del]').on('click', function() {
+								layer.confirm('确认删除吗，此操作是不可逆的？', {
+									  btn: ['确认','取消'] //按钮
+									}, function(){
+									  layer.msg('的确很重要', {icon: 1});
+									  location.reload(); //刷新
+									}, function(){
+									  layer.msg('也可以这样', {
+									    time: 20000, //20s后自动关闭
+									    btn: ['明白了', '知道了']
+									  });
+								});
+							});
 						});
 
 					},
@@ -152,7 +169,7 @@
 							content: form,
 							btn: ['保存', '取消'],
 							shade: false,
-							offset: ['100px', '30%'],
+							offset: ['20px', '20%'],
 							area: ['600px', '400px'],
 							zIndex: 19950924,
 							maxmin: true,
@@ -205,11 +222,11 @@
 					});
 				});
 
-				$('#import').on('click', function() {
+				/* $('#import').on('click', function() {
 					var that = this;
 					var index = layer.tips('只想提示地精准些', that, { tips: [1, 'white'] });
 					$('#layui-layer' + index).children('div.layui-layer-content').css('color', '#000000');
-				});
+				}); */
 			});
 		</script>
 	</body>

@@ -1,5 +1,11 @@
+<%@page import="com.alibaba.fastjson.JSONArray"%>
+<%@page import="microservice.online.entity.TbAdminUser"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	TbAdminUser adminUser = (TbAdminUser)request.getAttribute("adminUser");
+	JSONArray array = (JSONArray)request.getAttribute("menu");
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -46,7 +52,7 @@
 						<li class="layui-nav-item">
 							<a href="javascript:;" class="admin-header-user">
 								<img src="images/0.jpg" />
-								<span>beginner</span>
+								<span><%=adminUser.getUsername() %></span>
 							</a>
 							<dl class="layui-nav-child">
 								<dd>
@@ -134,7 +140,7 @@
 					});
 
 				});
-				navs = [{
+				/* navs = [{
 					"title": "粉丝管理",
 					"icon": "fa-user-secret",
 					"spread": false,
@@ -191,11 +197,6 @@
 						"href": "http://weibo.com/"
 					}]
 				}, {
-					"title": "这是一级导航",
-					"icon": "fa-stop-circle",
-					"href": "https://www.baidu.com",
-					"spread": false
-				}, {
 					"title": "其他",
 					"icon": "fa-stop-circle",
 					"href": "#",
@@ -205,7 +206,8 @@
 						"icon": "fa-github",
 						"href": "cop.html"
 					}]
-				}];
+				}]; */
+				navs = <%=array%>;
 			</script>
 		</div>
 	</body>

@@ -164,7 +164,7 @@
 							content: form,
 							btn: ['保存', '取消'],
 							shade: false,
-							offset: ['100px', '30%'],
+							offset: ['20px', '20%'],
 							area: ['600px', '400px'],
 							zIndex: 19950924,
 							maxmin: true,

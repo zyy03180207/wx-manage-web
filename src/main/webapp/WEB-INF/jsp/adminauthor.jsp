@@ -157,10 +157,10 @@
 					if(addBoxIndex !== -1)
 						return;
 					//本表单通过ajax加载 --以模板的形式，当然你也可以直接写在页面上读取
-					$.get('temp/edit-form.html', null, function(form) {
+					$.get('author/authorAdd', null, function(form) {
 						addBoxIndex = layer.open({
 							type: 1,
-							title: '添加表单',
+							title: '添加菜单权限',
 							content: form,
 							btn: ['保存', '取消'],
 							shade: false,

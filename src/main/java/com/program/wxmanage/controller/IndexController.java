@@ -31,6 +31,7 @@ import com.program.wxmanage.util.StringUtil;
 
 import microservice.api.ServiceApiHelper;
 import microservice.api.ServiceResult;
+import microservice.online.entity.TbAdminUser;
 import microservice.online.entity.TbFans;
 
 @Controller
@@ -69,6 +70,9 @@ public class IndexController extends BaseController {
 	@RequestMapping(value = "login",method = RequestMethod.GET)
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView andView = createMV("login");
+		this.getSession(request).removeAttribute(Global.MENUS);
+		this.getSession(request).removeAttribute(Global.SECQURITIES);
+		this.getSession(request).removeAttribute(Global.USER_INFO);
 		return andView;
 	}
 	
@@ -126,6 +130,33 @@ public class IndexController extends BaseController {
 	@RequestMapping(value = "index",method = RequestMethod.GET)
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView andView = createMV("index");
+		JSONObject jsonObject = (JSONObject) this.getSession(request, Global.USER_INFO);
+		TbAdminUser adminUser = JSONObject.parseObject(jsonObject.toJSONString(), TbAdminUser.class);
+		andView.addObject("adminUser", adminUser);
+//		"title": "粉丝管理",
+//		"icon": "fa-user-secret",
+//		"spread": false,
+//		"children": [{
+//			"title": "粉丝列表",
+//			"href": "fansList"
+//		}, {
+//			"title": "删除粉丝",
+//			"href": "delFansList"
+//		}]
+		JSONArray array = new JSONArray();
+		JSONObject object = new JSONObject();
+		object.put("title", "粉丝管理");
+		object.put("icon", "fa-user-secret");
+		object.put("spread", false);
+		object.put("href", "#");
+		JSONArray childrenArray1 = new JSONArray();
+		JSONObject object2 = new JSONObject();
+		object2.put("title", "粉丝列表");
+		object2.put("href", "fansList");
+		childrenArray1.add(object2);
+		object.put("children", childrenArray1);
+		array.add(object);
+		andView.addObject("menu", array);
 		return andView;
 	}
 	

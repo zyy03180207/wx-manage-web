@@ -96,7 +96,7 @@ public class AdminController extends BaseController {
 	
 	@RequestMapping(value = "adminAdd", method = RequestMethod.GET)
 	public ModelAndView adminAdd() {
-		ModelAndView andView = new ModelAndView("adminadd");
+		ModelAndView andView = createMV("adminadd");
 		JSONObject object = new JSONObject();
 		String json = ServiceApiHelper.formatParam("tb_rolelist", object.toJSONString(), Global.KEY);
 		String resultStr = remoteApiService.getWXAip().execute(json);

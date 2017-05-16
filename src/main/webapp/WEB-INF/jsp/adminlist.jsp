@@ -44,7 +44,6 @@
 								<th>手机</th>
 								<th>邮箱</th>
 								<th>角色</th>
-								<th>加入时间</th>
 								<th>是否启用</th>
 								<th>操作</th>
 							</tr>
@@ -74,16 +73,20 @@
 				{{# } else { }}
 				<td>{{ item.rname }}</td>
 				{{# } }}
-				<td>{{ item.crtime }}</td>
 				{{# if(item.state=='0') { }}
 				<td class="td_status"><span class="layui-btn layui-btn-danger layui-btn-mini">已停用</span></td>
 				{{# } else { }}
 				<td><span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
 				{{# } }}
 				<td>
-					<a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
+					{{# if(item.state=='0') { }}
+					<a href="javascript:;" data-id="{{ item.id }}" data-opt="on" target="_blank" class="layui-btn layui-btn-mini">开启</a>
+					{{# } else { }}
+					<a href="javascript:;" data-id="{{ item.id }}" data-opt="off" target="_blank" class="layui-btn layui-btn-danger layui-btn-mini">停用</a>
+					{{# } }}
+					<a href="javascript:;" data-id="{{ item.id }}" data-opt="fen" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">分配角色</a>
 					<a href="javascript:;" data-name="{{ item.id }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
-					<a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+					<a href="javascript:;" data-id="{{ item.id }}" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
 				</td>
 			</tr>
 			{{# }); }}
@@ -139,7 +142,48 @@
 							$that.children('td:last-child').children('a[data-opt=edit]').on('click', function() {
 								layer.msg($(this).data('name'));
 							});
-
+							$that.children('td:last-child').children('a[data-opt=fen]').on('click', function() {
+								layer.msg($(this).data('id'));
+							});
+							$that.children('td:last-child').children('a[data-opt=del]').on('click', function() {
+								layer.confirm('确认删除吗，此操作是不可逆的？', {
+									  btn: ['确认','取消'] //按钮
+									}, function(){
+									  layer.msg('的确很重要', {icon: 1});
+									  location.reload(); //刷新
+									}, function(){
+									  layer.msg('也可以这样', {
+									    time: 20000, //20s后自动关闭
+									    btn: ['明白了', '知道了']
+									  });
+								});
+							});
+							$that.children('td:last-child').children('a[data-opt=off]').on('click', function() {
+								layer.confirm('确认要停用该管理员账户吗？', {
+									  btn: ['确认','取消'] //按钮
+									}, function(){
+									  layer.msg('的确很重要', {icon: 1});
+									  location.reload(); //刷新
+									}, function(){
+									  layer.msg('也可以这样', {
+									    time: 20000, //20s后自动关闭
+									    btn: ['明白了', '知道了']
+									  });
+								});
+							});
+							$that.children('td:last-child').children('a[data-opt=on]').on('click', function() {
+								layer.confirm('确认要启用该管理员账户吗？', {
+									  btn: ['确认','取消'] //按钮
+									}, function(){
+									  layer.msg('的确很重要', {icon: 1});
+									  location.reload(); //刷新
+									}, function(){
+									  layer.msg('也可以这样', {
+									    time: 20000, //20s后自动关闭
+									    btn: ['明白了', '知道了']
+									  });
+								});
+							});
 						});
 
 					},
@@ -174,7 +218,7 @@
 							content: form,
 							btn: ['添加', '取消'],
 							shade: false,
-							offset: ['100px', '30%'],
+							offset: ['20px', '20%'],
 							area: ['600px', '400px'],
 							zIndex: 19950924,
 							maxmin: true,
