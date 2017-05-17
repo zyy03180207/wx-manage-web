@@ -57,23 +57,18 @@
 			{{# layui.each(d.list, function(index, item){ }}
 			<tr>
 				<td><input type="checkbox" lay-skin="primary"></td>
-				<td>{{ item.nickname }}</td>
-				<td>{{ item.openid }}</td>
-				{{# if(item.sex==1) { }}
-				<td>男</td>
-				{{# } else if(item.sex==2) { }}
-				<td>女</td>
+				<td>{{ item.id }}</td>
+				<td>{{ item.action }}</td>
+				<td>{{ item.menuName }}</td>
+				<td>{{ item.des }}</td>
+				{{# if(item.ismenu==1) { }}
+				<td>是</td>
 				{{# } else { }}
-				<td>未知</td>
+				<td>否</td>
 				{{# } }}
-				{{# if(item.groupid==0) { }}
-				<td>未分组</td>
-				{{# } }}
-				<td>{{ item.subscribe_time }}</td>
 				<td>
-					<a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
-					<a href="javascript:;" data-name="{{ item.cid }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
-					<a href="javascript:;" data-id="1" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+					<a href="javascript:;" data-id="{{ item.id }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
+					<a href="javascript:;" data-id="{{ item.id }}" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
 				</td>
 			</tr>
 			{{# }); }}
@@ -92,7 +87,7 @@
 					form = layui.form();
 					
 				paging.init({
-					url: 'fansList', //地址
+					url: 'author/authorList', //地址
 					elem: '#content', //内容容器
 					params: { //发送到服务端的参数
 					},
@@ -100,7 +95,7 @@
 					tempElem: '#tpl', //模块容器
 					pageConfig: { //分页参数配置
 						elem: '#paged', //分页容器
-						pageSize: 20 //分页大小
+						pageSize: 5 //分页大小
 					},
 					success: function() { //渲染成功的回调
 						//alert('渲染成功');
@@ -127,9 +122,11 @@
 						$('#content').children('tr').each(function() {
 							var $that = $(this);
 							$that.children('td:last-child').children('a[data-opt=edit]').on('click', function() {
-								layer.msg($(this).data('name'));
+								layer.msg($(this).data('id'));
 							});
-
+							$that.children('td:last-child').children('a[data-opt=del]').on('click', function() {
+								layer.msg($(this).data('id'));
+							});
 						});
 
 					},
@@ -141,7 +138,7 @@
 						var $that = $(this);
 						var $cbx = $that.children('td').eq(0).children('input[type=checkbox]')[0].checked;
 						if($cbx) {
-							var n = $that.children('td:last-child').children('a[data-opt=edit]').data('name');
+							var n = $that.children('td:last-child').children('a[data-opt=edit]').data('id');
 							names += n + ',';
 						}
 					});

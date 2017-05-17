@@ -1,10 +1,11 @@
+<%@page import="com.program.wxmanage.Global"%>
 <%@page import="com.alibaba.fastjson.JSONArray"%>
 <%@page import="microservice.online.entity.TbAdminUser"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	TbAdminUser adminUser = (TbAdminUser)request.getAttribute("adminUser");
-	JSONArray array = (JSONArray)request.getAttribute("menu");
+	JSONArray array = (JSONArray)request.getSession().getAttribute(Global.SECQURITIES);
 %>
 <!DOCTYPE html>
 <html>

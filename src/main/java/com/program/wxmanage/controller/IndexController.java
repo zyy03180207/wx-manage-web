@@ -133,16 +133,6 @@ public class IndexController extends BaseController {
 		JSONObject jsonObject = (JSONObject) this.getSession(request, Global.USER_INFO);
 		TbAdminUser adminUser = JSONObject.parseObject(jsonObject.toJSONString(), TbAdminUser.class);
 		andView.addObject("adminUser", adminUser);
-//		"title": "粉丝管理",
-//		"icon": "fa-user-secret",
-//		"spread": false,
-//		"children": [{
-//			"title": "粉丝列表",
-//			"href": "fansList"
-//		}, {
-//			"title": "删除粉丝",
-//			"href": "delFansList"
-//		}]
 		JSONArray array = new JSONArray();
 		JSONObject object = new JSONObject();
 		object.put("title", "粉丝管理");
@@ -187,6 +177,12 @@ public class IndexController extends BaseController {
 	@RequestMapping(value = "adminAuthor",method = RequestMethod.GET)
 	public ModelAndView adminAuthor(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView andView = createMV("adminauthor");
+		return andView;
+	}
+	
+	@RequestMapping(value = "error404",method = RequestMethod.GET)
+	public ModelAndView error404(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView andView = createMV("404");
 		return andView;
 	}
 	
