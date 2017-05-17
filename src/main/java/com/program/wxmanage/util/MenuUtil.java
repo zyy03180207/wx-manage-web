@@ -1,12 +1,14 @@
 package com.program.wxmanage.util;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import microservice.online.entity.TbSecqurity;
+import sun.awt.image.ImageWatched.Link;
 /**
  * 菜单解析工具
  * @author admin
@@ -31,6 +33,27 @@ public class MenuUtil {
 				object.put("spread", false);
 				object.put("href", childMenu.get("action"));
 				menus.add(object);
+			}
+		}
+		return menus;
+	}
+	
+	public static LinkedList<Menu> paresMenuList(JSONArray list, int parentId,int level) {
+		LinkedList<Menu> menus = new LinkedList<Menu>();
+		for(int i = 0;i < list.size(); i++) {
+			JSONObject childMenu = list.getJSONObject(i);
+			int id = childMenu.getInteger("id");
+			int pid = childMenu.getInteger("pid");
+			if(parentId == pid) {
+				LinkedList<Menu> list2 = paresMenuList(list, id, level + 1);
+				Menu menu = new Menu();
+				menu.setId(childMenu.getIntValue("id"));
+				menu.setTitle(childMenu.getString("menuName"));
+				menu.setLevel(level);
+				menus.add(menu);
+				for(Menu menu2 : list2) {
+					menus.add(menu2);
+				}
 			}
 		}
 		return menus;
@@ -80,6 +103,6 @@ public class MenuUtil {
 		jsonArray.add(menu4); 
 		jsonArray.add(menu5); 
 		jsonArray.add(menu6); 
-		System.out.println(paresMenu(jsonArray, 0));
+		System.out.println(paresMenuList(jsonArray, 0, 0));
 	}
 }

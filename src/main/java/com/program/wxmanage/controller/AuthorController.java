@@ -1,5 +1,7 @@
 package com.program.wxmanage.controller;
 
+import java.util.LinkedList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,6 +18,8 @@ import com.program.wxmanage.BaseController;
 import com.program.wxmanage.Global;
 import com.program.wxmanage.param.AjaxResult;
 import com.program.wxmanage.service.RemoteApiService;
+import com.program.wxmanage.util.Menu;
+import com.program.wxmanage.util.MenuUtil;
 import com.program.wxmanage.util.StringUtil;
 
 import microservice.api.ServiceApiHelper;
@@ -36,6 +40,20 @@ public class AuthorController extends BaseController {
 	@RequestMapping(value = "authorAdd", method = RequestMethod.GET)
 	public ModelAndView authorAdd(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView andView = createMV("authoradd");
+		JSONObject object = new JSONObject();
+		String json = ServiceApiHelper.formatParam("tb_authorlist", object.toJSONString(), Global.KEY);
+		String resultStr = remoteApiService.getWXAip().execute(json);
+		ServiceResult result = ServiceApiHelper.parseResult(resultStr);
+		LinkedList<Menu> linkedList = new LinkedList<Menu>();
+		if(result.isSucc()){
+			String data = result.getData();
+			JSONObject resData = JSONObject.parseObject(data);
+			JSONArray array = resData.getJSONArray("list");
+			linkedList = MenuUtil.paresMenuList(array, 0, 0);
+			andView.addObject("menus", linkedList);
+		} else {
+			andView.addObject("menus", linkedList);
+		}
 		return andView;
 	}
 	

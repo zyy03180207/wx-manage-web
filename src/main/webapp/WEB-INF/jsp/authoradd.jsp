@@ -1,7 +1,11 @@
+<%@page import="com.program.wxmanage.util.Menu"%>
+<%@page import="java.util.LinkedList"%>
 <%@page import="microservice.online.entity.TbRole"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	LinkedList<Menu> menus = (LinkedList<Menu>)request.getAttribute("menus");
+%>
 <div style="margin: 15px;">
 	<form class="layui-form">
 		<div class="layui-form-item">
@@ -10,9 +14,9 @@
 				<select name="author" lay-verify="required">
 					<option value="-1">作为功能权限</option>
 					<option value="0">作为一级菜单</option>
-					<option value="1">粉丝管理</option>
-					<option value="2">&nbsp;&nbsp;└─粉丝列表</option>
-					<option value="3">&nbsp;&nbsp;└─删除粉丝</option>
+					<%for(Menu menu : menus) { %>
+						<option value="<%=menu.getId()%>"><%for(int i = 0; i < menu.getLevel(); i++){ %>&nbsp;&nbsp;<% if(menu.getLevel()!=0){%>└─<%}} %><%=menu.getTitle() %></option>
+					<%} %>
 				</select>
 			</div>
 		</div>

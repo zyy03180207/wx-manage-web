@@ -14,6 +14,7 @@ public class Menu {
 	private boolean spread;
 	private String href;
 	private List<Menu> childen;
+	private int level;
 	public int getId() {
 		return id;
 	}
@@ -55,5 +56,11 @@ public class Menu {
 	}
 	public void setChilden(List<Menu> childen) {
 		this.childen = childen;
+	}
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
 	}
 }

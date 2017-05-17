@@ -53,8 +53,9 @@
 				</div>
 			</div>
 		</div>
+		</br>
 		<footer>
-		<p>Beginner © programafter.com</p>
+		<p>四十五度工作室 © programafter.com</p>
 		</footer>
 	</div>
 	<script type="text/javascript" src="plugins/layui/layui.js"></script>
