@@ -186,6 +186,12 @@ public class IndexController extends BaseController {
 		return andView;
 	}
 	
+	@RequestMapping(value = "error500",method = RequestMethod.GET)
+	public ModelAndView error500(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView andView = createMV("500");
+		return andView;
+	}
+	
 	@RequestMapping(value = "adminList",method = RequestMethod.GET)
 	public ModelAndView adminList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView andView = createMV("adminlist");

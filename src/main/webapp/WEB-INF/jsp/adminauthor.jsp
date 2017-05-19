@@ -67,6 +67,7 @@
 				<td>否</td>
 				{{# } }}
 				<td>
+					<a href="javascript:;" data-id="{{ item.id }}" target="_blank" data-opt="child" class="layui-btn layui-btn-normal layui-btn-mini">添加子项</a>
 					<a href="javascript:;" data-id="{{ item.id }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
 					<a href="javascript:;" data-id="{{ item.id }}" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
 				</td>
@@ -121,6 +122,9 @@
 						//绑定所有编辑按钮事件						
 						$('#content').children('tr').each(function() {
 							var $that = $(this);
+							$that.children('td:last-child').children('a[data-opt=child]').on('click', function() {
+								layer.msg($(this).data('id'));
+							});
 							$that.children('td:last-child').children('a[data-opt=edit]').on('click', function() {
 								layer.msg($(this).data('id'));
 							});

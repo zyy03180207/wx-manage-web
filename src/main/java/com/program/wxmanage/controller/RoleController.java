@@ -55,6 +55,18 @@ public class RoleController extends BaseController {
 		return StringUtil.utfToIso(resJson.toJSONString());
 	}
 	
+	@RequestMapping(value = "roleToAuthor", method = RequestMethod.GET)
+	public ModelAndView roleToAuthor(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView andView = createMV("roletoauthor");
+		return andView;
+	}
+	
+	@RequestMapping(value = "roleAdd", method = RequestMethod.GET)
+	public ModelAndView roleAdd(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView andView = createMV("roleadd");
+		return andView;
+	}
+	
 	public ModelAndView createMV(String jsp) {
 		ModelAndView mv = new ModelAndView(""+jsp);
 		return mv;

@@ -43,27 +43,6 @@
 	<session-config>
 		<session-timeout>20</session-timeout>
 	</session-config>
-	<servlet>
-		<servlet-name>Kaptcha</servlet-name>
-		<servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
-		<init-param>
-			<param-name>kaptcha.border</param-name>    <!-- 是否有边框 -->
-			<param-value>yes</param-value>
-		</init-param>
-		<init-param>
-			<param-name>kaptcha.textproducer.char.space</param-name>   <!--字符之间的间距 -->
-			<param-value>6</param-value>
-		</init-param>
-		<init-param>
-			<param-name>kaptcha.textproducer.char.length</param-name>   <!-- 字符的个数 -->
-			<param-value>4</param-value>
-		</init-param>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>Kaptcha</servlet-name>
-		<url-pattern>/Kaptcha.jpg</url-pattern>
-	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>

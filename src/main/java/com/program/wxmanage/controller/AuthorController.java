@@ -35,6 +35,53 @@ public class AuthorController extends BaseController {
 	@RequestMapping(value = "authorAdd", method = RequestMethod.POST)
 	public void authorAddPost(HttpServletRequest request, HttpServletResponse response) {
 		AjaxResult ajaxResult = new AjaxResult();
+		String title = getPara(request, "name");
+		String pid = getPara(request, "author");
+		String des = getPara(request, "des");
+		String icon = getPara(request, "icon");
+		String action = getPara(request, "uri");
+		String ismenu = getPara(request, "switch");
+		if(StringUtil.isEmpty(title)) {
+			ajaxResult.setMesg("请输入名称");
+			this.write(response, ajaxResult);
+			return;
+		}
+		if(StringUtil.isEmpty(des)) {
+			ajaxResult.setMesg("请输入权限描述");
+			this.write(response, ajaxResult);
+			return;
+		}
+		if(StringUtil.isEmpty(action)) {
+			ajaxResult.setMesg("请输入权限连接");
+			this.write(response, ajaxResult);
+			return;
+		}
+		if(!StringUtil.isEmpty(ismenu) && ismenu.equals("on")) {
+			ismenu = "1";
+		} else {
+			ismenu = "0";
+		}
+		JSONObject object = new JSONObject();
+		object.put("pid", pid);
+		object.put("title", title);
+		object.put("des", des);
+		object.put("icon", icon);
+		object.put("ismenu", ismenu);
+		object.put("action", action);
+		String json = ServiceApiHelper.formatParam("tb_add_author", object.toJSONString(), Global.KEY);
+		String resultStr = remoteApiService.getWXAip().execute(json);
+		ServiceResult result = ServiceApiHelper.parseResult(resultStr);
+		if(result.isSucc()) {
+			ajaxResult.setMesg(result.getMesg());
+			ajaxResult.setSucc(result.isSucc());
+			this.write(response, ajaxResult);
+			return;
+		} else {
+			ajaxResult.setSucc(false);
+			ajaxResult.setMesg(result.getMesg());
+			this.write(response, ajaxResult);
+			return;
+		}
 	}
 	
 	@RequestMapping(value = "authorAdd", method = RequestMethod.GET)

@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
- <link rel="stylesheet" href="//res.layui.com/layui/build/css/layui.css?t=1494451009005"  media="all">
-  <link rel="stylesheet" href="//res.layui.com/css/global.css?t=1494451009005" media="all">
+<title>好干净的页面啊，什么都没有的样子</title>
+ <link rel="stylesheet" href="plugins/layui/css/layui.css?t=1494451009005"  media="all">
+  <link rel="stylesheet" href="css/global.css?t=1494451009005" media="all">
 </head>
 <body>
 <div style="padding: 50px 0; height: 320px; text-align: center;">
