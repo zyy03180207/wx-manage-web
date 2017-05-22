@@ -11,7 +11,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>微信公众号管理系统 v1.0</title>
+		<title>明日程序总管理系统 v1.0</title>
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -31,7 +31,7 @@
 				<div class="layui-main">
 					<div class="admin-login-box">
 						<a class="logo" style="left: 0;" href="index">
-							<span style="font-size: 20px;">微信公众号管理系统</span>
+							<span style="font-size: 20px;">明日程序总管理系统</span>
 						</a>
 						<div class="admin-side-toggle">
 							<i class="fa fa-bars" aria-hidden="true"></i>

@@ -15,7 +15,7 @@
 					<option value="-1">作为功能权限</option>
 					<option value="0">作为一级菜单</option>
 					<%for(Menu menu : menus) { %>
-						<option value="<%=menu.getId()%>"><%for(int i = 0; i < menu.getLevel(); i++){ %>&nbsp;&nbsp;<% if(menu.getLevel()!=0){%>└─<%}} %><%=menu.getTitle() %></option>
+						<option value="<%=menu.getId()%>"><%for(int i = 0; i < menu.getLevel(); i++){ %>&nbsp;&nbsp;<% }if(menu.getLevel()!=0){%>└─<%} %><%=menu.getTitle() %></option>
 					<%} %>
 				</select>
 			</div>

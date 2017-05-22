@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>微信公众号管理系统</title>
+<title>明日程序总管理系统</title>
 <link rel="shortcut icon" href="images/12333.ico" />
 <link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
 <link rel="stylesheet" href="css/login.css" />
