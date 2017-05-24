@@ -87,6 +87,12 @@ public class AuthorController extends BaseController {
 	@RequestMapping(value = "authorAdd", method = RequestMethod.GET)
 	public ModelAndView authorAdd(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView andView = createMV("authoradd");
+		String c = request.getParameter("child");
+		if(!StringUtil.isEmpty(c)) {
+			andView.addObject("child", Integer.valueOf(c));
+		} else {
+			andView.addObject("child", -2);
+		}
 		JSONObject object = new JSONObject();
 		String json = ServiceApiHelper.formatParam("tb_authorlist", object.toJSONString(), Global.KEY);
 		String resultStr = remoteApiService.getWXAip().execute(json);

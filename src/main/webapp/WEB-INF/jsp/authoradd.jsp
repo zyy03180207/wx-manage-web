@@ -5,6 +5,7 @@
     pageEncoding="UTF-8"%>
 <%
 	LinkedList<Menu> menus = (LinkedList<Menu>)request.getAttribute("menus");
+	Integer child = (Integer)request.getAttribute("child");
 %>
 <div style="margin: 15px;">
 	<form class="layui-form">
@@ -14,9 +15,13 @@
 				<select name="author" lay-verify="required">
 					<option value="-1">作为功能权限</option>
 					<option value="0">作为一级菜单</option>
-					<%for(Menu menu : menus) { %>
+					<%for(Menu menu : menus) { 
+						if(menu.getId() == child) {
+					%>
+						<option value="<%=menu.getId()%>" selected="selected"><%for(int i = 0; i < menu.getLevel(); i++){ %>&nbsp;&nbsp;<% }if(menu.getLevel()!=0){%>└─<%} %><%=menu.getTitle() %></option>
+					<%} else { %>
 						<option value="<%=menu.getId()%>"><%for(int i = 0; i < menu.getLevel(); i++){ %>&nbsp;&nbsp;<% }if(menu.getLevel()!=0){%>└─<%} %><%=menu.getTitle() %></option>
-					<%} %>
+					<%}} %>
 				</select>
 			</div>
 		</div>

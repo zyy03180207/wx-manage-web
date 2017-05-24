@@ -87,6 +87,7 @@
 					<a href="javascript:;" data-id="{{ item.id }}" data-opt="fen" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">分配角色</a>
 					<a href="javascript:;" data-name="{{ item.id }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
 					<a href="javascript:;" data-id="{{ item.id }}" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+					<a href="javascript:;" data-id="{{ item.id }}" data-opt="upd" class="layui-btn layui-btn-danger layui-btn-mini">初始密码</a>
 				</td>
 			</tr>
 			{{# }); }}
@@ -147,6 +148,19 @@
 							});
 							$that.children('td:last-child').children('a[data-opt=del]').on('click', function() {
 								layer.confirm('确认删除吗，此操作是不可逆的？', {
+									  btn: ['确认','取消'] //按钮
+									}, function(){
+									  layer.msg('的确很重要', {icon: 1});
+									  location.reload(); //刷新
+									}, function(){
+									  layer.msg('也可以这样', {
+									    time: 20000, //20s后自动关闭
+									    btn: ['明白了', '知道了']
+									  });
+								});
+							});
+							$that.children('td:last-child').children('a[data-opt=upd]').on('click', function() {
+								layer.confirm('确认初始化密码吗，此操作会将登录密码修改为【12345678】？', {
 									  btn: ['确认','取消'] //按钮
 									}, function(){
 									  layer.msg('的确很重要', {icon: 1});

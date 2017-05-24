@@ -123,7 +123,66 @@
 						$('#content').children('tr').each(function() {
 							var $that = $(this);
 							$that.children('td:last-child').children('a[data-opt=child]').on('click', function() {
-								layer.msg($(this).data('id'));
+								//添加子菜单权限功能
+								$.get('author/authorAdd?child=' + $(this).data('id'), null, function(form) {
+									addBoxIndex = layer.open({
+										type: 1,
+										title: '添加菜单权限',
+										content: form,
+										btn: ['保存', '取消'],
+										shade: false,
+										offset: ['20px', '20%'],
+										area: ['600px', '400px'],
+										zIndex: 19950924,
+										maxmin: true,
+										yes: function(index) {
+											//触发表单的提交事件
+											$('form.layui-form').find('button[lay-filter=edit]').click();
+										},
+										full: function(elem) {
+											var win = window.top === window.self ? window : parent.window;
+											$(win).on('resize', function() {
+												var $this = $(this);
+												elem.width($this.width()).height($this.height()).css({
+													top: 0,
+													left: 0
+												});
+												elem.children('div.layui-layer-content').height($this.height() - 95);
+											});
+										},
+										success: function(layero, index) {
+											//弹出窗口成功后渲染表单
+											var form = layui.form();
+											form.render();
+											form.on('submit(edit)', function(data) {
+												$.ajax({
+													type:"POST",
+													url:"author/authorAdd",
+													dataType:"json",
+													data: data.field,
+													success:function(data) {
+														if(data.succ) {
+															layerTips.msg(data.mesg, {icon: 6});
+															layerTips.close(index);
+															location.reload(); //刷新
+														} else {
+															layerTips.msg(data.mesg, {icon: 5});
+														}
+													},
+													error:function(){
+														layerTips.msg(data.mesg, {icon: 5});
+													}
+												});
+												//这里可以写ajax方法提交表单
+												return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。									
+											});
+											//console.log(layero, index);
+										},
+										end: function() {
+											addBoxIndex = -1;
+										}
+									});
+								});
 							});
 							$that.children('td:last-child').children('a[data-opt=edit]').on('click', function() {
 								layer.msg($(this).data('id'));
