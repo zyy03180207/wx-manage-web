@@ -24,6 +24,7 @@ import com.program.wxmanage.util.StringUtil;
 import microservice.api.ServiceApiHelper;
 import microservice.api.ServiceResult;
 import microservice.online.entity.TbRole;
+import sun.org.mozilla.javascript.internal.json.JsonParser;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -136,6 +137,82 @@ public class AdminController extends BaseController {
 			resJson.put("count", 0);
 		}
 		return StringUtil.utfToIso(resJson.toJSONString());
+	}
+	
+	@RequestMapping(value = "adminDel", method = RequestMethod.POST)
+	public void adminDel(HttpServletRequest request, HttpServletResponse response) {
+		AjaxResult ajaxResult = new AjaxResult();
+		String idStr = getPara(request, "delId");
+		if(StringUtil.isEmpty(idStr)) {
+			ajaxResult.setMesg("请选择要删除的用户");
+			this.write(response, ajaxResult);
+			return;
+		}
+		String[] delId = null;
+		if(idStr.contains(",")) {
+			idStr = idStr.substring(0, idStr.length() - 1);
+			delId = idStr.split(",");
+		} else {
+			delId = new String[]{idStr};
+		}
+		JSONObject object = new JSONObject();
+		object.put("delId", delId);
+		String json = ServiceApiHelper.formatParam("tb_del_admin", object.toJSONString(), Global.KEY);
+		String resultStr = remoteApiService.getWXAip().execute(json);
+		ServiceResult result = ServiceApiHelper.parseResult(resultStr);
+		if(result.isSucc()) {
+			ajaxResult.setMesg(result.getMesg());
+			ajaxResult.setSucc(true);
+			this.write(response, ajaxResult);
+			return;
+		} else {
+			ajaxResult.setMesg(result.getMesg());
+			ajaxResult.setSucc(false);
+			this.write(response, ajaxResult);
+			return;
+		}
+	}
+	
+	@RequestMapping(value = "adminOS", method = RequestMethod.POST)
+	public void adminOS(HttpServletRequest request, HttpServletResponse response) {
+		AjaxResult ajaxResult = new AjaxResult();
+		String idStr = getPara(request, "ids");
+		String state = getPara(request, "state");
+		if(StringUtil.isEmpty(idStr)) {
+			if("0".equals(state)) {
+				ajaxResult.setMesg("请选择要停用的用户");
+				this.write(response, ajaxResult);
+				return;
+			} else {
+				ajaxResult.setMesg("请选择要启用的用户");
+				this.write(response, ajaxResult);
+				return;
+			}
+		}
+		String[] ids = null;
+		if(idStr.contains(",")) {
+			idStr = idStr.substring(0, idStr.length() - 1);
+			ids = idStr.split(",");
+		} else {
+			ids = new String[]{idStr};
+		}
+		JSONObject object = new JSONObject();
+		object.put("ids", ids);
+		object.put("state", state);
+		String json = ServiceApiHelper.formatParam("tb_os_admin", object.toJSONString(), Global.KEY);
+		String resultStr = remoteApiService.getWXAip().execute(json);
+		ServiceResult result = ServiceApiHelper.parseResult(resultStr);
+		if(result.isSucc()) {
+			ajaxResult.setMesg(result.getMesg());
+			ajaxResult.setSucc(true);
+			this.write(response, ajaxResult);
+			return;
+		} else {
+			ajaxResult.setMesg(result.getMesg());
+			ajaxResult.setSucc(false);
+			this.write(response, ajaxResult);
+			return;
+		}
 	}
 	
 	public ModelAndView createMV(String jsp) {

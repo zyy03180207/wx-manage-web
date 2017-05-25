@@ -19,13 +19,13 @@
 				<a href="javascript:;" class="layui-btn layui-btn-small" id="add">
 					<i class="layui-icon">&#xe608;</i> 添加管理员
 				</a>
-				<a href="#" class="layui-btn layui-btn-small" id="getSelected">
+				<a href="#" class="layui-btn layui-btn-small" id="getStart">
 					<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i> 批量开启
 				</a>
-				<a href="#" class="layui-btn layui-btn-small" id="getSelected">
+				<a href="#" class="layui-btn layui-btn-small" id="getStop">
 					<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i> 批量停用
 				</a>
-				<a href="#" class="layui-btn layui-btn-small" id="getSelected">
+				<a href="#" class="layui-btn layui-btn-small" id="getDel">
 					<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i> 批量删除
 				</a>
 				<a href="javascript:;" class="layui-btn layui-btn-small" id="search">
@@ -85,7 +85,7 @@
 					<a href="javascript:;" data-id="{{ item.id }}" data-opt="off" target="_blank" class="layui-btn layui-btn-danger layui-btn-mini">停用</a>
 					{{# } }}
 					<a href="javascript:;" data-id="{{ item.id }}" data-opt="fen" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">分配角色</a>
-					<a href="javascript:;" data-name="{{ item.id }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
+					<a href="javascript:;" data-id="{{ item.id }}" data-opt="edit" class="layui-btn layui-btn-mini">编辑</a>
 					<a href="javascript:;" data-id="{{ item.id }}" data-opt="del" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
 					<a href="javascript:;" data-id="{{ item.id }}" data-opt="upd" class="layui-btn layui-btn-danger layui-btn-mini">初始密码</a>
 				</td>
@@ -141,22 +141,35 @@
 						$('#content').children('tr').each(function() {
 							var $that = $(this);
 							$that.children('td:last-child').children('a[data-opt=edit]').on('click', function() {
-								layer.msg($(this).data('name'));
+								layer.msg($(this).data('id'));
 							});
 							$that.children('td:last-child').children('a[data-opt=fen]').on('click', function() {
 								layer.msg($(this).data('id'));
 							});
 							$that.children('td:last-child').children('a[data-opt=del]').on('click', function() {
+								var id = $(this).data('id');
 								layer.confirm('确认删除吗，此操作是不可逆的？', {
 									  btn: ['确认','取消'] //按钮
 									}, function(){
-									  layer.msg('的确很重要', {icon: 1});
-									  location.reload(); //刷新
+										$.ajax({
+											type:"POST",
+											url:"admin/adminDel",
+											dataType:"json",
+											data: {"delId":id},
+											success:function(data) {
+												if(data.succ) {
+													layerTips.msg(data.mesg, {icon: 6});
+													location.reload(); //刷新
+												} else {
+													layerTips.msg(data.mesg, {icon: 5});
+												}
+											},
+											error:function(){
+												layerTips.msg(data.mesg, {icon: 5});
+											}
+										});
 									}, function(){
-									  layer.msg('也可以这样', {
-									    time: 20000, //20s后自动关闭
-									    btn: ['明白了', '知道了']
-									  });
+										layer.msg('的确很重要', {icon: 1});
 								});
 							});
 							$that.children('td:last-child').children('a[data-opt=upd]').on('click', function() {
@@ -173,29 +186,55 @@
 								});
 							});
 							$that.children('td:last-child').children('a[data-opt=off]').on('click', function() {
+								var id = $(this).data('id');
 								layer.confirm('确认要停用该管理员账户吗？', {
 									  btn: ['确认','取消'] //按钮
 									}, function(){
-									  layer.msg('的确很重要', {icon: 1});
-									  location.reload(); //刷新
+									  $.ajax({
+											type:"POST",
+											url:"admin/adminOS",
+											dataType:"json",
+											data: {"ids":id,"state":"0"},
+											success:function(data) {
+												if(data.succ) {
+													layerTips.msg(data.mesg, {icon: 6});
+													location.reload(); //刷新
+												} else {
+													layerTips.msg(data.mesg, {icon: 5});
+												}
+											},
+											error:function(){
+												layerTips.msg(data.mesg, {icon: 5});
+											}
+										});
 									}, function(){
-									  layer.msg('也可以这样', {
-									    time: 20000, //20s后自动关闭
-									    btn: ['明白了', '知道了']
-									  });
+										 layer.msg('考虑一下', {icon: 1});
 								});
 							});
 							$that.children('td:last-child').children('a[data-opt=on]').on('click', function() {
+								var id = $(this).data('id');
 								layer.confirm('确认要启用该管理员账户吗？', {
 									  btn: ['确认','取消'] //按钮
 									}, function(){
-									  layer.msg('的确很重要', {icon: 1});
-									  location.reload(); //刷新
+										  $.ajax({
+												type:"POST",
+												url:"admin/adminOS",
+												dataType:"json",
+												data: {"ids":id,"state":"1"},
+												success:function(data) {
+													if(data.succ) {
+														layerTips.msg(data.mesg, {icon: 6});
+														location.reload(); //刷新
+													} else {
+														layerTips.msg(data.mesg, {icon: 5});
+													}
+												},
+												error:function(){
+													layerTips.msg(data.mesg, {icon: 5});
+												}
+											});
 									}, function(){
-									  layer.msg('也可以这样', {
-									    time: 20000, //20s后自动关闭
-									    btn: ['明白了', '知道了']
-									  });
+										 layer.msg('考虑一下', {icon: 1});
 								});
 							});
 						});
@@ -203,19 +242,111 @@
 					},
 				});
 				//获取所有选择的列
-				$('#getSelected').on('click', function() {
+				$('#getDel').on('click', function() {
 					var names = '';
 					$('#content').children('tr').each(function() {
 						var $that = $(this);
 						var $cbx = $that.children('td').eq(0).children('input[type=checkbox]')[0].checked;
 						if($cbx) {
-							var n = $that.children('td:last-child').children('a[data-opt=edit]').data('name');
+							var n = $that.children('td:last-child').children('a[data-opt=edit]').data('id');
 							names += n + ',';
 						}
 					});
-					layer.msg('你选择的名称有：' + names);
+					layer.confirm('确认要删除所选择的用户吗，此操作是不可逆的？', {
+						  btn: ['确认','取消'] //按钮
+						}, function(){
+							$.ajax({
+								type:"POST",
+								url:"admin/adminDel",
+								dataType:"json",
+								data: {"delId":names},
+								success:function(data) {
+									if(data.succ) {
+										layerTips.msg(data.mesg, {icon: 6});
+										location.reload(); //刷新
+									} else {
+										layerTips.msg(data.mesg, {icon: 5});
+									}
+								},
+								error:function(){
+									layerTips.msg(data.mesg, {icon: 5});
+								}
+							});
+						}, function(){
+							layer.msg('的确很重要', {icon: 1});
+					});
 				});
-
+				//批量开启
+				$('#getStart').on('click', function() {
+					var names = '';
+					$('#content').children('tr').each(function() {
+						var $that = $(this);
+						var $cbx = $that.children('td').eq(0).children('input[type=checkbox]')[0].checked;
+						if($cbx) {
+							var n = $that.children('td:last-child').children('a[data-opt=edit]').data('id');
+							names += n + ',';
+						}
+					});
+					layer.confirm('确认要开启所选择的用户吗？', {
+						  btn: ['确认','取消'] //按钮
+						}, function(){
+							$.ajax({
+								type:"POST",
+								url:"admin/adminOS",
+								dataType:"json",
+								data: {"ids":names,"state":"1"},
+								success:function(data) {
+									if(data.succ) {
+										layerTips.msg(data.mesg, {icon: 6});
+										location.reload(); //刷新
+									} else {
+										layerTips.msg(data.mesg, {icon: 5});
+									}
+								},
+								error:function(){
+									layerTips.msg(data.mesg, {icon: 5});
+								}
+							});
+						}, function(){
+							layer.msg('考虑一下', {icon: 1});
+					});
+				});
+				//批量停用
+				$('#getStop').on('click', function() {
+					var names = '';
+					$('#content').children('tr').each(function() {
+						var $that = $(this);
+						var $cbx = $that.children('td').eq(0).children('input[type=checkbox]')[0].checked;
+						if($cbx) {
+							var n = $that.children('td:last-child').children('a[data-opt=edit]').data('id');
+							names += n + ',';
+						}
+					});
+					layer.confirm('确认要停用所选择的用户吗？', {
+						  btn: ['确认','取消'] //按钮
+						}, function(){
+							$.ajax({
+								type:"POST",
+								url:"admin/adminOS",
+								dataType:"json",
+								data: {"ids":names,"state":"0"},
+								success:function(data) {
+									if(data.succ) {
+										layerTips.msg(data.mesg, {icon: 6});
+										location.reload(); //刷新
+									} else {
+										layerTips.msg(data.mesg, {icon: 5});
+									}
+								},
+								error:function(){
+									layerTips.msg(data.mesg, {icon: 5});
+								}
+							});
+						}, function(){
+							layer.msg('考虑一下', {icon: 1});
+					});
+				});
+				
 				$('#search').on('click', function() {
 					parent.layer.alert('你点击了搜索按钮')
 				});

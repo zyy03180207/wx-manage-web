@@ -34,10 +34,10 @@
 							<span style="font-size: 20px;">明日程序管理系统</span>
 						</a>
 						<div class="admin-side-toggle">
-							<i class="fa fa-bars" aria-hidden="true"></i>
+							<i class="fa fa-bars" aria-hidden="true" title="隐藏/显示菜单"></i>
 						</div>
 						<div class="admin-side-full">
-							<i class="fa fa-life-bouy" aria-hidden="true"></i>
+							<i class="fa fa-life-bouy" aria-hidden="true" title="全屏显示"></i>
 						</div>
 					</div>
 					<ul class="layui-nav admin-header-item">
